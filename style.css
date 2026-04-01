@@ -1,0 +1,145 @@
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #eaecee;
+    color: #3c3e41;
+    margin: 0;
+}
+
+/* .nav {
+    background-color: #eaecee;
+    box-shadow: 1px 2px 10px #c1c8d3, -1px -2px 10px #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 1;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 1200px;
+    max-width: 90%;
+    margin: 30px auto;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 10px;
+} */
+.gradient-text {
+    background-image: linear-gradient(-45deg, #D000F7, #24BAE3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.neo-card {
+    background-color: #eaecee;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    padding: 20px;
+}
+
+.neo-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    padding: 5px;
+    background-image: linear-gradient(-45deg, #D000F7, #24BAE3);
+    color: #fff;
+}
+
+.nav-item {
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: #dfe4ea;
+}
+
+/* Sidebar fix */
+.position-fixed {
+  height: 100vh;
+  width: 220px;
+}
+
+/* Push content */
+.main-content {
+  margin-left: 240px;
+}
+
+.fin-flow {
+    padding: 12px;
+}
+.divider-line {
+  border: none;
+  height: 1px;
+  background: #727373;
+  margin-bottom:  5px;
+}
+
+/* Role toggle */
+.role-toggle {
+  display: flex;
+  background: #eaecee;
+  border-radius: 8px;
+  padding: 5px;
+  border: 1px solid #c7cacc;
+}
+
+.role-toggle button {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.role-toggle .active {
+  background: linear-gradient(-45deg, #D000F7, #24BAE3);
+  color: white;
+}
+
+/* Cards colors */
+.income { 
+    color: #00c896; 
+}
+.expense {
+    color: #ff4d6d; 
+}
+.balance { 
+    color: #5f9cff; 
+}
+.savings { 
+    color: #24BAE3; 
+}
+
+/* Equal chart height */
+.chart-card {
+  height: 350px;
+}
+
+.chart-card canvas {
+    width: 100%;
+    height: 100%;
+    max-height: 280px;
+}
+
+/* Bar chart fix */
+#barChart {
+  max-height: 280px !important;
+}
