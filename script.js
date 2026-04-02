@@ -21,6 +21,27 @@ document.querySelectorAll("#menu .nav-item").forEach(item => {
   });
 });
 
+const menuToggle = document.getElementById("menuToggle");
+const closeSidebar = document.getElementById("closeSidebar");
+const sidebar = document.querySelector(".sidebar");
+
+// Open
+menuToggle.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+
+// Close (X button)
+closeSidebar.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+});
+
+// Click outside close
+document.addEventListener("click", (e) => {
+  if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+    sidebar.classList.remove("active");
+  }
+});
+
 // 🔥 ROLE TOGGLE
 document.getElementById("adminBtn").onclick = () => {
   currentRole = "admin";
@@ -73,7 +94,7 @@ new Chart(document.getElementById("lineChart"), {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
     }
 });
 
@@ -81,32 +102,45 @@ new Chart(document.getElementById("lineChart"), {
 new Chart(document.getElementById("pieChart"), {
   type: "doughnut",
   data: {
-    labels: ["Food", "Transport", "Shopping"],
+    labels: ["Utilities", "Food", "Transport", "Entertainment", "Shopping", "Healthcare", "Investment"],
     datasets: [{
-      data: [2000, 1000, 3000],
-      backgroundColor: ["#D000F7", "#24BAE3", "#6C5CE7"]
+      data: [5000, 3000, 1500, 1000, 4000, 1200, 6000],
+      backgroundColor: ["#8B5CF6", "#D000F7", "#24BAE3", "#6C5CE7", "#FF4D6D", "#10B981",  "#FBBF24" ],
+      borderWidth: 0
     }]
   },
   options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: "60%",
+    
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 10,
+          boxHeight: 10,
+          padding: 5,
+          color: "#555"
+        }
+      },
+    },
+  }
 });
 
 // Bar Chart
 new Chart(document.getElementById("barChart"), {
   type: "bar",
   data: {
-    labels: ["Mar", "Apr", "May", "Jun"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
         label: "Income",
-        data: [100000, 90000, 70000, 110000],
+        data: [0, 0, 100000, 90000, 70000, 110000],
         backgroundColor: "#24BAE3"
       },
       {
         label: "Expense",
-        data: [30000, 5000, 20000, 10000],
+        data: [0, 0, 30000, 5000, 20000, 10000],
         backgroundColor: "#D000F7"
       }
     ]
