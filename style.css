@@ -31,6 +31,7 @@ body {
     transition: all 0.3s ease;
     margin-bottom: 10px;
     width: 100%;
+    animation: fadeUp 0.5s ease 0.1s both;
 }
 
 #pageTitle {
@@ -50,10 +51,9 @@ body {
     color: #fff;
     border: none;
 }
-
 .neo-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 6px 6px 12px #bfc6d1, -6px -6px 12px #ffffff;
+    transform: translateY(-6px);
+    box-shadow: 10px 10px 25px #b0b8c5, -10px -10px 25px #ffffff;
 }
 
 .nav-item {
@@ -91,6 +91,7 @@ body {
     border: 1px solid #a1a2a4;
     padding: 5px;
     outline: none;
+    cursor: pointer;
     box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
 }
 
@@ -134,7 +135,7 @@ body {
 }
 .role-toggle {
     display: flex;
-    background: #e3e7ec;
+    background: #dfe4ea;
     border-radius: 8px;
     padding: 5px;
     
@@ -189,9 +190,10 @@ body {
     font-weight: 700;
     font-size: 18px; 
 }
-/* Equal chart height */
+
 .chart-card {
     height: 380px;
+    animation: fadeUp 0.5s ease 0.1s both;
 }
 
 .chart-card canvas {
@@ -204,6 +206,16 @@ body {
 /* Bar chart fix */
 #barChart {
     max-height: 300px;
+}
+.no-data-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #777;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
 }
 
 .menu-btn {
@@ -255,11 +267,15 @@ body {
         border-radius: 6px;
         font-size: 10px;
         padding: -15px -10px;
+        margin-left: -5px;
     }
     .top-bar {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .neo-select {
+        width: 75px;
     }
     #pageTitle {
     font-family: 'Syne', sans-serif;
@@ -282,3 +298,159 @@ body {
 }
 
 
+/* Transaction section */
+.filters-card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    background: #eaecee;
+    border-radius: 15px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+.transactionsControls {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.form-control {
+    padding: 8px 12px;
+    flex: 1;
+    outline: none;
+    min-width: 180px;
+    border: 1px solid #ced0d3;
+    background: #eaecee;
+    box-shadow: inset 1px 1px 3px #c1c8d3;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    border-radius: 8px;
+}
+
+.form-control:focus {
+    outline: none;
+    border: 1px solid #ced0d3;
+    background: #eaecee;
+    box-shadow: inset 1px 1px 3px #c1c8d3;
+}
+
+.txn-sort {
+    background: #eaecee;
+    border-radius: 6px;
+    border: 1px solid #a1a2a4;
+    padding: 5px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    font-size: 12px;
+    transform: all 0.3s ease;
+}
+
+
+.add-btn {
+    border: none;
+    background: linear-gradient(-45deg, #D000F7, #24BAE3);
+    color: #fff;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    padding: 12px 8px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+}
+
+.add-btn:active {
+    box-shadow: inset 4px 4px 10px #c1c8d3,
+                inset -4px -4px 10px #ffffff;
+    transform: scale(0.97);
+}
+
+.table-anim {
+    animation: fadeUp 0.5s ease 0.1s both;
+}
+
+.table-wrap {
+    background-color: #eaecee;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+@keyframes fadeUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(16px); 
+    }
+    to {
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #6c757d; 
+    border-radius: 10px;       
+    overflow: hidden;
+}
+
+
+thead th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    background-image: linear-gradient(-45deg, #D000F7, #24BAE3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+    border-bottom: 1px solid #6c757d;
+}
+
+tbody tr {
+    border-top: 1px solid #6c757d;
+    animation: fadeUp 0.3s ease both;
+    
+}
+
+tbody td {
+    padding: 14px 18px;
+    font-size: 12px;
+    border-bottom: 1px solid #6c757d;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.disabled-btn {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.disabled-btn:hover::after {
+    content: "🚫 Admin only";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    font-size: 10px;
+    background: #333;
+    color: #fff;
+    padding: 3px 6px;
+    border-radius: 5px;
+}

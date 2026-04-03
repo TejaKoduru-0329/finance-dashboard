@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="style.css">
 
         <!-- Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -70,6 +70,12 @@
                             <option>Apr 2025</option>
                             <option>May 2025</option>
                             <option>Jun 2025</option>
+                            <option>Jul 2025</option>
+                            <option>Aug 2025</option>
+                            <option>Sep 2025</option>
+                            <option>Oct 2025</option>
+                            <option>Nov 2025</option>
+                            <option>Dec 2025</option>
                         </select>
                         <span id="roleBadge" class="neo-btn px-3">ADMIN</span>
                     </div>
@@ -79,10 +85,10 @@
                     <div id="dashboardSection">
 
                     
-                        <!-- 🔹 Cards -->
+                        <!-- Cards -->
                         <div class="row g-3 mb-4">
-
                             <div class="col-12 col-sm-6 col-lg-3">
+
                                 <div class="neo-card">
                                     <p>Total Balance</p>
                                     <h4 id="balance">₹0</h4>
@@ -121,6 +127,7 @@
                                         <span class="gradient-text">Balance Trend</span>
                                     </h6>
                                     <canvas id="lineChart"></canvas>
+                                    <div id="lineNoData" class="no-data-msg"></div>
                                 </div>
                             </div>
 
@@ -128,8 +135,10 @@
                                 <div class="neo-card chart-card">
                                     <h6>
                                         <span class="gradient-text">Spending Breakdown</span>
+                                        
                                     </h6>
                                     <canvas id="pieChart"></canvas>
+                                    <div id="pieNoData" class="no-data-msg"></div>
                                 </div>
                             </div>
 
@@ -142,63 +151,63 @@
                                     <span class="gradient-text">Monthly Income vs Expenses</span>
                                 </h6>
                                 <canvas id="barChart"></canvas>
+                                <div id="barNoData" class="no-data-msg"></div>
                             </div>
                         </div>
                     </div>
+
                     <!-- Transactions Tab -->
-
                     <div id="transactionsSection" style="display: none;">
-                        <div class="neo-card">
-                            <h5>Transactions Records</h5>
-
-                            <div class="transationsControls d-flex">
-                                <input type="text" class="form-control mb-3" placeholder="Search Transactions...">
-                                <select class="neo-select">
+                        <div class="filters-card">
+            
+                            <div class="transactionsControls d-flex">
+                                <input type="text" class="form-control" placeholder="Search Transactions...">
+                                <select class="txn-sort">
                                     <option value="">All Types</option>
-                                    <option value="">Income</option>
-                                    <option value="">Expense</option>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
                                 </select>
 
-                                <select class="neo-select">
+                                <select class="txn-sort">
                                     <option value="">All Categories</option>
-                                    <option value="">Entertainment</option>
-                                    <option value="">Food</option>
-                                    <option value="">Freelance</option>
-                                    <option value="">Healthcare</option>
-                                    <option value="">Investment</option>
-                                    <option value="">Salary</option>
-                                    <option value="">Shopping</option>
-                                    <option value="">Transport</option>
-                                    <option value="">Utilities</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Investment">Investment</option>
+                                    <option value="Salary">Salary</option>
+                                    <option value="Shopping">Shopping</option>
+                                    <option value="Transport">Transport</option>
+                                    <option value="Utilities">Utilities</option>
                                 </select>
 
-                                <select class="neo-select">
-                                    <option value="">Date &uarr;</option>
-                                    <option value="">Date &darr;</option>
-                                    <option value="">Amount &uarr;</option>
-                                    <option value="">Amount &darr;</option>
+                                <select class="txn-sort">
+                                    <option value="dateAsc">Date &uarr;</option>
+                                    <option value="dateDesc">Date &darr;</option>
+                                    <option value="amtAsc">Amount &uarr;</option>
+                                    <option value="amtDesc">Amount &darr;</option>
                                 </select>
                                 <button class="add-btn" id="add-tnx-btn">Add Transaction</button>
                             </div>
                         </div>
-                        <div class="neo-card mt-3">
-                            <div class="tnx-table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Amount</th>
-                                            <th>Category</th>
-                                            <th>Type</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="transactionTable"></tbody>
-                                </table>
-                            </div>
-                        </div>
 
+                        
+                        <div class="table-wrap mt-3">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                        <th>Category</th>
+                                        <th>Type</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionTable"></tbody>
+                            </table>
+                        </div>
+                        
                     </div>
 
                     <!-- Insights Tab -->
