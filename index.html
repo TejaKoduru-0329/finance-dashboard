@@ -36,7 +36,7 @@
                     <ul class="nav flex-column" id="menu">
                         <li class="nav-item mb-3 active" data-page="dashboard">📊 Dashboard</li>
                         <li class="nav-item mb-3" data-page="transactions">💳 Transactions</li>
-                        <li class="nav-item" data-page="insights">💡 Insights</li>
+                        <li class="nav-item mb-3" data-page="insights">💡 Insights</li>
                     </ul>
 
                     <!-- 🔥 Bottom Toggle -->
@@ -76,73 +76,141 @@
                 </div>
                 <!-- Main Content -->
                 <div class="main-content p-4">
+                    <div id="dashboardSection">
 
-                    <!-- 🔹 Cards -->
-                    <div class="row g-3 mb-4">
+                    
+                        <!-- 🔹 Cards -->
+                        <div class="row g-3 mb-4">
 
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="neo-card">
-                                <p>Total Balance</p>
-                                <h4 id="balance">₹0</h4>
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="neo-card">
+                                    <p>Total Balance</p>
+                                    <h4 id="balance">₹0</h4>
+                                </div>
                             </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="neo-card">
+                                    <p>Total Income</p>
+                                    <h4 id="income">₹0</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="neo-card">
+                                    <p>Total Expense</p>
+                                    <h4 id="expense">₹0</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="neo-card">
+                                    <p>Savings Rate</p>
+                                    <h4 id="savings">0%</h4>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="neo-card">
-                                <p>Total Income</p>
-                                <h4 id="income">₹0</h4>
+                        <!-- Charts -->
+                        <div class="row mb-4">
+
+                            <div class="col-12 col-lg-8">
+                                <div class="neo-card chart-card">
+                                    <h6>
+                                        <span class="gradient-text">Balance Trend</span>
+                                    </h6>
+                                    <canvas id="lineChart"></canvas>
+                                </div>
                             </div>
+
+                            <div class="col-12 col-lg-4">
+                                <div class="neo-card chart-card">
+                                    <h6>
+                                        <span class="gradient-text">Spending Breakdown</span>
+                                    </h6>
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="neo-card">
-                                <p>Total Expense</p>
-                                <h4 id="expense">₹0</h4>
+                        <!-- Bar Chart -->
+                        <div class="col-12">
+                            <div class="neo-card chart-card">
+                                <h6>
+                                    <span class="gradient-text">Monthly Income vs Expenses</span>
+                                </h6>
+                                <canvas id="barChart"></canvas>
                             </div>
                         </div>
+                    </div>
+                    <!-- Transactions Tab -->
 
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="neo-card">
-                                <p>Savings Rate</p>
-                                <h4 id="savings">0%</h4>
+                    <div id="transactionsSection" style="display: none;">
+                        <div class="neo-card">
+                            <h5>Transactions Records</h5>
+
+                            <div class="transationsControls d-flex">
+                                <input type="text" class="form-control mb-3" placeholder="Search Transactions...">
+                                <select class="neo-select">
+                                    <option value="">All Types</option>
+                                    <option value="">Income</option>
+                                    <option value="">Expense</option>
+                                </select>
+
+                                <select class="neo-select">
+                                    <option value="">All Categories</option>
+                                    <option value="">Entertainment</option>
+                                    <option value="">Food</option>
+                                    <option value="">Freelance</option>
+                                    <option value="">Healthcare</option>
+                                    <option value="">Investment</option>
+                                    <option value="">Salary</option>
+                                    <option value="">Shopping</option>
+                                    <option value="">Transport</option>
+                                    <option value="">Utilities</option>
+                                </select>
+
+                                <select class="neo-select">
+                                    <option value="">Date &uarr;</option>
+                                    <option value="">Date &darr;</option>
+                                    <option value="">Amount &uarr;</option>
+                                    <option value="">Amount &darr;</option>
+                                </select>
+                                <button class="add-btn" id="add-tnx-btn">Add Transaction</button>
+                            </div>
+                        </div>
+                        <div class="neo-card mt-3">
+                            <div class="tnx-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Category</th>
+                                            <th>Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transactionTable"></tbody>
+                                </table>
                             </div>
                         </div>
 
                     </div>
 
-                    <!-- Charts -->
-                    <div class="row mb-4">
-
-                        <div class="col-12 col-lg-8">
-                            <div class="neo-card chart-card">
-                                <h6>
-                                    <span class="gradient-text">Balance Trend</span>
-                                </h6>
-                                <canvas id="lineChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4">
-                            <div class="neo-card chart-card">
-                                <h6>
-                                    <span class="gradient-text">Spending Breakdown</span>
-                                </h6>
-                                <canvas id="pieChart"></canvas>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Bar Chart -->
-                    <div class="col-12">
-                        <div class="neo-card chart-card">
-                            <h6>
-                                <span class="gradient-text">Monthly Income vs Expenses</span>
-                            </h6>
-                            <canvas id="barChart"></canvas>
+                    <!-- Insights Tab -->
+                    <div id="insightsSection" style="display:none;">
+                        <div class="neo-card">
+                            <h5>Insights</h5>
+                            <p>Coming soon...</p>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
 
             

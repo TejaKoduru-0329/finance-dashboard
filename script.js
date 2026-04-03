@@ -5,19 +5,47 @@ const transactions = [
 ];
 
 // 🔹 STATE
-let currentRole = "admin";
-let currentPage = "dashboard";
+// let currentRole = "admin";
+// let currentPage = "dashboard";
 
-// 🔥 NAVIGATION
+// // 🔥 NAVIGATION
+// document.querySelectorAll("#menu .nav-item").forEach(item => {
+//   item.addEventListener("click", () => {
+//     document.querySelectorAll("#menu .nav-item").forEach(i => i.classList.remove("active"));
+//     item.classList.add("active");
+
+//     currentPage = item.dataset.page;
+
+//     document.getElementById("pageTitle").innerText =
+//       currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
+//   });
+// });
+
+const sections = {
+  dashboard: document.getElementById("dashboardSection"),
+  transactions: document.getElementById("transactionsSection"),
+  insights: document.getElementById("insightsSection")
+};
+
 document.querySelectorAll("#menu .nav-item").forEach(item => {
   item.addEventListener("click", () => {
+
+    // active style
     document.querySelectorAll("#menu .nav-item").forEach(i => i.classList.remove("active"));
     item.classList.add("active");
 
-    currentPage = item.dataset.page;
+    const page = item.dataset.page;
 
+    // 🔥 ALL hide
+    Object.values(sections).forEach(sec => sec.style.display = "none");
+
+    // 🔥 SHOW selected
+    sections[page].style.display = "block";
+
+    // 🔥 TITLE change
     document.getElementById("pageTitle").innerText =
-      currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
+      page.charAt(0).toUpperCase() + page.slice(1);
+
   });
 });
 
@@ -150,6 +178,25 @@ new Chart(document.getElementById("barChart"), {
     maintainAspectRatio: false
     }
 });
+
+function renderTransactions() {
+  const table = document.getElementById("transactionTable");
+
+  table.innerHTML = "";
+
+  transactions.forEach(t => {
+    table.innerHTML += `
+      <tr>
+        <td>${t.date}</td>
+        <td>₹${t.amount}</td>
+        <td>${t.category}</td>
+        <td>${t.type}</td>
+      </tr>
+    `;
+  });
+}
+
+renderTransactions();
 
 // 🔥 INIT
 updateRoleUI();
