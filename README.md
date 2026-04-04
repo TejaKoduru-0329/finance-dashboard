@@ -52,10 +52,12 @@ PaisaFlow helps users track and understand their financial activity through an i
 - Empty state handling for charts and table
 
 ## 📁 Project Structure
-finance-dashboard/
+```
+paisaflow/
 ├── index.html
 ├── style.css
 └── script.js
+```
 
 ## ⚙️ Setup
 No installation needed. Just clone and open:
