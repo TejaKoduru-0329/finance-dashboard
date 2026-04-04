@@ -497,25 +497,67 @@ txnCard.addEventListener("click", e => {
 
 // save
 document.getElementById("save-btn").onclick = () => {
-    let date        = document.getElementById("input-date").value;
-    let description = document.getElementById("input-desc").value.trim();
-    let amount      = Number(document.getElementById("input-amount").value);
-    let category    = document.getElementById("input-category").value;
-    let type        = document.getElementById("input-type").value;
+    let date     = document.getElementById("input-date");
+    let desc     = document.getElementById("input-desc");
+    let amount   = document.getElementById("input-amount");
+    let category = document.getElementById("input-category");
+    let type     = document.getElementById("input-type");
 
-    if (!date || !description || !amount || !category || !type
-        || category === "Select Category" || type === "") {
-        alert("Please fill all fields!");
-        return;
+    // clear old errors
+    ["input-date","input-desc","input-amount","input-category","input-type"].forEach(id => {
+        document.getElementById(id).classList.remove("error");
+    });
+    ["err-date","err-desc","err-amount","err-category","err-type"].forEach(id => {
+        document.getElementById(id).classList.remove("show");
+    });
+
+    let valid = true;
+
+    if (!date.value) {
+        date.classList.add("error");
+        document.getElementById("err-date").classList.add("show");
+        valid = false;
     }
+    if (!desc.value.trim()) {
+        desc.classList.add("error");
+        document.getElementById("err-desc").classList.add("show");
+        valid = false;
+    }
+    if (!amount.value || Number(amount.value) <= 0) {
+        amount.classList.add("error");
+        document.getElementById("err-amount").classList.add("show");
+        valid = false;
+    }
+    if (!category.value) {
+        category.classList.add("error");
+        document.getElementById("err-category").classList.add("show");
+        valid = false;
+    }
+    if (!type.value) {
+        type.classList.add("error");
+        document.getElementById("err-type").classList.add("show");
+        valid = false;
+    }
+
+    if (!valid) return;
 
     if (editingIndex !== null) {
         transactions[editingIndex] = {
             ...transactions[editingIndex],
-            date, description, amount, category, type
+            date: date.value,
+            description: desc.value.trim(),
+            amount: Number(amount.value),
+            category: category.value,
+            type: type.value
         };
     } else {
-        transactions.push({ date, description, amount, category, type });
+        transactions.push({
+            date: date.value,
+            description: desc.value.trim(),
+            amount: Number(amount.value),
+            category: category.value,
+            type: type.value
+        });
     }
 
     closeCard();
