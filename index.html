@@ -212,10 +212,33 @@
 
                     <!-- Insights Tab -->
                     <div id="insightsSection" style="display:none;">
-                        <div class="neo-card">
-                            <h5>Insights</h5>
-                            <p>Coming soon...</p>
+                        
+                        <div class="insights-grid">
+
+                            <div class="neo-card insight-card">
+                                <p class="insight-label">TOP SPENDING CATEGORY</p>
+                                <h3 class="insight-big" id="top-cat-name">—</h3>
+                                <p class="insight-sub" id="top-cat-sub">—</p>
+                            </div>
+
+                            <div class="neo-card insight-card">
+                                <p class="insight-label">SAVINGS RATE</p>
+                                <h3 class="insight-big gradient-text" id="savings-pct">—</h3>
+                                <p class="insight-sub" id="savings-sub">—</p>
+                            </div>
+
+                            <div class="neo-card insight-card spend-card">
+                                <p class="insight-label">SPENDING BREAKDOWN</p>
+                                <div class="spend-list" id="spend-list"></div>
+                            </div>
+
                         </div>
+
+                        <div class="neo-card mt-3">
+                            <p class="insight-label">MONTHLY COMPARISON</p>
+                            <div class="month-list" id="month-list"></div>
+                        </div>
+
                     </div>
                 </div>  
             </div>
