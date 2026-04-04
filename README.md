@@ -3,7 +3,7 @@
 A clean and interactive personal finance dashboard built with vanilla HTML, CSS, and JavaScript.
 
 ## 🚀 Live Demo
-[Add your deployed link here]
+[PaisaFlow Live](https://paisa-flow.vercel.app)
 
 ## 📌 Overview
 PaisaFlow helps users track and understand their financial activity through an intuitive dashboard interface. Built as a frontend assignment focusing on UI design, component structure, and interaction design.
