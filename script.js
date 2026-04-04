@@ -1,5 +1,5 @@
 
-// ========= DATA =========
+// Dummy Data
 let currentRole = "admin";
 let editingIndex = null;
 
@@ -30,7 +30,7 @@ let transactions = [
   { id:24, description:'SIP',               amount:10000, date:'2025-06-16', category:'Investment',     type:'expense' },
 ];
 
-// ========= FILTER STATE =========
+// Filtering
 let filters = {
   search: "",
   type: "",
@@ -38,7 +38,7 @@ let filters = {
   sort: ""
 };
 
-// ========= NAV =========
+// Navigation
 const sections = {
   dashboard: document.getElementById("dashboardSection"),
   transactions: document.getElementById("transactionsSection"),
@@ -55,18 +55,20 @@ document.querySelectorAll("#menu .nav-item").forEach(item => {
 
     sidebar.classList.remove("active");
 
-    if(item.dataset.page === "dashboard"){
-      setTimeout(() => {
-        applyFilters();
-      }, 50);
+    if (item.dataset.page === "dashboard") {
+    setTimeout(() => applyFilters(), 50);
     }
+
+    if(item.dataset.page === "insights"){
+    setTimeout(() => showInsights(), 100);
+    } 
 
     document.getElementById("pageTitle").innerText =
       item.dataset.page.charAt(0).toUpperCase() + item.dataset.page.slice(1);
   };
 });
 
-// ================= SIDEBAR =================
+// Sidebar Setup
 const menuToggle = document.getElementById("menuToggle");
 const closeSidebar = document.getElementById("closeSidebar");
 const sidebar = document.querySelector(".sidebar");
@@ -81,7 +83,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-// ROLE TOGGLE
+// Role Changing
 document.getElementById("adminBtn").onclick = () => {
   currentRole = "admin";
   sidebar.classList.remove("active");
@@ -103,7 +105,7 @@ function updateRoleUI() {
 }
 
 
-// ========= SUMMARY =========
+// Summary
 function calculateSummary(data = transactions) {
   let income = 0, expense = 0;
 
@@ -121,7 +123,7 @@ function calculateSummary(data = transactions) {
   document.getElementById("savings").innerText = savings.toFixed(1) + "%";
 }
 
-// ========= RENDER TABLE =========
+// Transaction Table
 function renderTransactions(list = transactions) {
   const table = document.getElementById("transactionTable");
 
@@ -164,7 +166,7 @@ function renderTransactions(list = transactions) {
   handleAccess();
 }
 
-// ========= ACCESS =========
+// Edit and Delete access
 function handleAccess() {
   const isAdmin = currentRole === "admin";
 
@@ -176,7 +178,7 @@ function handleAccess() {
   });
 }
 
-// ========= FILTER =========
+// Overall Filters
 function applyFilters() {
   let data = [...transactions];
 
@@ -199,12 +201,13 @@ function applyFilters() {
   if (filters.sort === "amtAsc") data.sort((a,b)=>a.amount-b.amount);
   if (filters.sort === "amtDesc") data.sort((a,b)=>b.amount-a.amount);
 
+  currentFilteredData = data
   renderTransactions(data);
   calculateSummary(data);
   renderCharts(data);
 }
 
-// ========= FILTER EVENTS =========
+// Event Filters
 document.querySelector(".form-control").oninput = e => {
   filters.search = e.target.value.toLowerCase();
   applyFilters();
@@ -225,7 +228,7 @@ document.querySelectorAll(".txn-sort")[2].onchange = e => {
   applyFilters();
 };
 
-// ===== DASHBOARD FILTER =====
+// Dashboard Filtering
 const dashboardFilter = document.querySelector(".neo-select");
 
 dashboardFilter.onchange = () => {
@@ -243,8 +246,12 @@ dashboardFilter.onchange = () => {
   }
 
   renderTransactions(data);
+
+  if (document.getElementById("insightsSection").style.display !== "none") { 
+    showInsights();
+  }
 };
-// ========= CHARTS =========
+// Charts Section
 function renderCharts(data = transactions) {
 
   const lineCanvas = document.getElementById("lineChart");
@@ -286,7 +293,7 @@ function renderCharts(data = transactions) {
     window.barChart.destroy();
   }
 
-  // LINE CHART
+  // Lne Chart
   let sorted = [...data].sort((a,b)=> new Date(a.date)-new Date(b.date));
 
   let monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -346,7 +353,7 @@ function renderCharts(data = transactions) {
       maintainAspectRatio: false
     }
   });
-  // PIE CHART
+  // PIE Chart
   let categoryMap = {};
   data.forEach(t=>{
     categoryMap[t.category] = (categoryMap[t.category] || 0) + t.amount;
@@ -380,7 +387,7 @@ function renderCharts(data = transactions) {
     }
   });
 
-  // BAR CHART
+  // Bar Chart
   let months = ["Jan","Feb","Mar","Apr","May","Jun", "Jul", "Aug", "Sep", "Nov", "Dec"];
 
   let incomeArr = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -433,7 +440,7 @@ function renderCharts(data = transactions) {
 
 }
 
-// ===== DELETE =====
+// Event Deletion
 document.addEventListener("click", e => {
     if (e.target.classList.contains("delete-btn")) {
         if (currentRole !== "admin") return;
@@ -442,7 +449,7 @@ document.addEventListener("click", e => {
     }
 });
 
-// ===== ADD / EDIT CARD =====
+// Add or Edit Event
 const txnCard = document.getElementById("txn-card");
 
 function openCard(mode, index = null) {
@@ -474,13 +481,13 @@ function closeCard() {
     editingIndex = null;
 }
 
-// open on add btn
+// add btn
 document.getElementById("add-txn-btn").onclick = () => {
     if (currentRole !== "admin") return;
     openCard("add");
 };
 
-// open on edit btn
+// edit btn
 document.addEventListener("click", e => {
     if (e.target.classList.contains("edit-btn")) {
         if (currentRole !== "admin") return;
@@ -488,14 +495,14 @@ document.addEventListener("click", e => {
     }
 });
 
-// cancel
+// cancel btn
 document.getElementById("cancel-btn").onclick = closeCard;
 
 txnCard.addEventListener("click", e => {
     if (e.target === txnCard) closeCard();
 });
 
-// save
+// save btn
 document.getElementById("save-btn").onclick = () => {
     let date     = document.getElementById("input-date");
     let desc     = document.getElementById("input-desc");
@@ -503,7 +510,6 @@ document.getElementById("save-btn").onclick = () => {
     let category = document.getElementById("input-category");
     let type     = document.getElementById("input-type");
 
-    // clear old errors
     ["input-date","input-desc","input-amount","input-category","input-type"].forEach(id => {
         document.getElementById(id).classList.remove("error");
     });
@@ -564,7 +570,135 @@ document.getElementById("save-btn").onclick = () => {
     applyFilters();
 };
 
-// INIT
+// Insights section
+function showInsights() {
+    let data = [...transactions];
+
+    let select = document.querySelector(".neo-select");
+    let val = select.value
+
+    if (val && val !== "All Time"){
+
+    
+        let month = val.split(" ")[0]; 
+        let monthNums = {
+            Jan:"01", Feb:"02", Mar:"03", Apr:"04",
+            May:"05", Jun:"06", Jul:"07", Aug:"08",
+            Sep:"09", Oct:"10", Nov:"11", Dec:"12"
+        };
+        let m = monthNums[month];
+        if (m) data = data.filter(t => t.date.split("-")[1] === m);
+    }
+
+
+    let totalIncome  = 0;
+    let totalExpense = 0;
+    data.forEach(t => {
+        if (t.type === "income") totalIncome  += t.amount;
+        else                     totalExpense += t.amount;
+    });
+    let saved      = totalIncome - totalExpense;
+    let savingsPct = totalIncome ? ((saved / totalIncome) * 100).toFixed(1) : 0;
+
+    let catMap = {};
+    data.filter(t => t.type === "expense").forEach(t => {
+        catMap[t.category] = (catMap[t.category] || 0) + t.amount;
+    });
+    let sortedCats = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+    let topCat     = sortedCats[0] || ["None", 0];
+    let topPct     = totalExpense ? ((topCat[1] / totalExpense) * 100).toFixed(1) : 0;
+
+    let catColors = {
+        Salary:"#10B981", Freelance:"#24BAE3", Food:"#FF4D6D",
+        Transport:"#FBBF24", Entertainment:"#8B5CF6",
+        Shopping:"#D000F7", Healthcare:"#FF6B6B",
+        Utilities:"#6C5CE7", Investment:"#0984e3"
+    };
+
+    let monthlyMap = {};
+    data.forEach(t => {
+        let key = t.date.slice(0, 7);
+        if (!monthlyMap[key]) monthlyMap[key] = { income: 0, expense: 0 };
+        if (t.type === "income") monthlyMap[key].income  += t.amount;
+        else                     monthlyMap[key].expense += t.amount;
+    });
+
+    let monthNames = {
+        "01":"Jan","02":"Feb","03":"Mar","04":"Apr",
+        "05":"May","06":"Jun","07":"Jul","08":"Aug",
+        "09":"Sep","10":"Oct","11":"Nov","12":"Dec"
+    };
+
+    
+    let topCatEl = document.getElementById("top-cat-name");
+    topCatEl.innerText   = topCat[0];
+    topCatEl.style.color = catColors[topCat[0]] || "#555";
+    document.getElementById("top-cat-sub").innerText =
+        `₹${topCat[1].toLocaleString("en-IN")} spent — ${topPct}% of total expenses`;
+
+    document.getElementById("savings-pct").innerText = savingsPct + "%";
+    document.getElementById("savings-sub").innerText =
+        `You saved ₹${saved.toLocaleString("en-IN")} out of ₹${totalIncome.toLocaleString("en-IN")} earned`;
+
+    // spending breakdown 
+    document.getElementById("spend-list").innerHTML = sortedCats.map(([cat, amt]) => {
+        let pct   = totalExpense ? ((amt / totalExpense) * 100).toFixed(1) : 0;
+        let color = catColors[cat] || "#888";
+        let width = sortedCats[0][1] ? ((amt / sortedCats[0][1]) * 100).toFixed(1) : 0;
+        return `
+            <div class="spend-row">
+                <div class="spend-top">
+                    <span class="spend-cat" style="color:${color}">${cat}</span>
+                    <span class="spend-amt">₹${amt.toLocaleString("en-IN")} (${pct}%)</span>
+                </div>
+                <div class="spend-bar-bg">
+                    <div class="spend-bar-fill" style="width:${width}%; background:${color};"></div>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    document.getElementById("month-list").innerHTML = Object.entries(monthlyMap)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([key, val]) => {
+            let [yr, mo] = key.split("-");
+            let label    = monthNames[mo] + " " + yr;
+            let net      = val.income - val.expense;
+            let netColor = net >= 0 ? "#10B981" : "#e84040";
+            return `
+                <div class="month-row">
+                    <span class="month-label">${label}</span>
+                    <span class="month-income">+₹${val.income.toLocaleString("en-IN")}</span>
+                    <span class="month-expense">-₹${val.expense.toLocaleString("en-IN")}</span>
+                    <span class="month-net" style="color:${netColor}">₹${net.toLocaleString("en-IN")}</span>
+                </div>
+            `;
+        }).join("");
+}
+// Dark & Light Mode
+const themeBtn  = document.getElementById("theme-btn");
+const themeIcon = document.getElementById("theme-icon");
+const themeLabel = document.getElementById("theme-label");
+
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark");
+    themeIcon.classList.replace("fa-moon", "fa-sun");
+    themeLabel.innerText = "Light Mode";
+}
+
+themeBtn.onclick = () => {
+    document.body.classList.toggle("dark");
+    let isDark = document.body.classList.contains("dark");
+
+    themeIcon.classList.replace(
+        isDark ? "fa-moon" : "fa-sun",
+        isDark ? "fa-sun"  : "fa-moon"
+    );
+    themeLabel.innerText = isDark ? "Light Mode" : "Dark Mode";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+};
+
+
 setTimeout(() => {
   applyFilters();
 }, 100);
