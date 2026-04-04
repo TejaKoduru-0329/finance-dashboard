@@ -26,7 +26,7 @@
                 
                 <div class="sidebar d-flex flex-column">
                     <div class="d-flex">
-                    <h4 class="gradient-text mb-0 mx-3">FinFlow</h4>
+                    <h4 class="gradient-text mb-0 mx-3">PaisaFlow</h4>
                     <button id="closeSidebar" class="neo-btn menu-btn">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -39,7 +39,7 @@
                         <li class="nav-item mb-3" data-page="insights">💡 Insights</li>
                     </ul>
 
-                    <!-- 🔥 Bottom Toggle -->
+                    <!-- Role Toggle -->
                     
                     <div class="mt-auto">
                         <hr class="divider-line mb-3">
@@ -49,10 +49,16 @@
                             <button id="viewerBtn">Viewer</button>
                         </div>
                     </div>
+                    <div class="theme-toggle mt-3">
+                        <button id="theme-btn" class="theme-btn">
+                            <i class="fa-solid fa-moon" id="theme-icon"></i>
+                            <span id="theme-label">Dark Mode</span>
+                        </button>
+                    </div>
 
                 </div>
                     
-                <!-- Top Bar -->
+                <!-- Top nav Bar -->
                 <div class="top-bar d-flex justify-content-between mb-4">
                     <div style="display: flex; align-items: center; gap: 10px;">
 
@@ -80,12 +86,12 @@
                         <span id="roleBadge" class="neo-btn px-3">ADMIN</span>
                     </div>
                 </div>
-                <!-- Main Content -->
+                <!-- Main body -->
                 <div class="main-content p-4">
                     <div id="dashboardSection">
 
                     
-                        <!-- Cards -->
+                        <!-- Summary cards -->
                         <div class="row g-3 mb-4">
                             <div class="col-12 col-sm-6 col-lg-3">
 
@@ -131,6 +137,7 @@
                                 </div>
                             </div>
 
+                            <!-- Pie Chart -->
                             <div class="col-12 col-lg-4">
                                 <div class="neo-card chart-card">
                                     <h6>
@@ -216,26 +223,34 @@
                         <div class="insights-grid">
 
                             <div class="neo-card insight-card">
-                                <p class="insight-label">TOP SPENDING CATEGORY</p>
+                                <h6>
+                                    <span class="gradient-text">TOP SPENDING CATEGORY</span>
+                                </h6>
                                 <h3 class="insight-big" id="top-cat-name">—</h3>
                                 <p class="insight-sub" id="top-cat-sub">—</p>
                             </div>
 
                             <div class="neo-card insight-card">
-                                <p class="insight-label">SAVINGS RATE</p>
+                                <h6>
+                                    <span class="gradient-text">SAVINGS RATE</span>
+                                </h6>
                                 <h3 class="insight-big gradient-text" id="savings-pct">—</h3>
                                 <p class="insight-sub" id="savings-sub">—</p>
                             </div>
 
                             <div class="neo-card insight-card spend-card">
-                                <p class="insight-label">SPENDING BREAKDOWN</p>
+                                <h6>
+                                    <span class="gradient-text">SPENDING BREAKDOWN</span>
+                                </h6>
                                 <div class="spend-list" id="spend-list"></div>
                             </div>
 
                         </div>
 
-                        <div class="neo-card mt-3">
-                            <p class="insight-label">MONTHLY COMPARISON</p>
+                        <div class="insight-bottom-card insight-card mt-3">
+                            <h6>
+                                <span class="gradient-text">MONTHLY COMPARISON</span>
+                            </h6>
                             <div class="month-list" id="month-list"></div>
                         </div>
 
