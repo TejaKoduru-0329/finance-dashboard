@@ -437,20 +437,143 @@ tbody tr:last-child td {
     border-bottom: none;
 }
 
-.disabled-btn {
-    opacity: 0.4;
-    cursor: not-allowed;
-    position: relative;
+.edit-btn, .delete-btn {
+    border: 1px solid #6c757d; 
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 5px;
+    color: #777;
+    font-weight: 500;
+    cursor: pointer;
 }
 
-.disabled-btn:hover::after {
-    content: "🚫 Admin only";
-    position: absolute;
-    top: -25px;
-    left: 0;
-    font-size: 10px;
-    background: #333;
+.edit-btn:hover, .delete-btn:hover {
+    background: linear-gradient(-45deg, #D000F7, #24BAE3);
     color: #fff;
-    padding: 3px 6px;
-    border-radius: 5px;
+    border: none;
+    padding: 2px 4px;
+}
+
+.edit-btn:disabled,
+.delete-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Add / Edit Card */
+.txn-card-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in 0.2s ease;
+}
+
+.add-transaction-box {
+    background: #eaecee;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px #c1c8d3, -5px -5px 15px #fff;
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    animation: slide-up 0.3s ease;
+}
+
+.box-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    background: linear-gradient(-45deg, #D000F7, #24BAE3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+.txn-input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 14px;
+}
+
+.txn-input-section label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.data-input {
+    background: #eaecee;
+    border: 1px solid #ced0d3;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: inset 2px 2px 5px #c1c8d3, inset -2px -2px 5px #fff;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+
+.action-btn {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    background: #eaecee;
+    color: #777;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 4px 4px 10px #c1c8d3, -4px -4px 10px #fff;
+    text-align: center;
+    transition: all 0.2s ease;
+    user-select: none;
+    border: none;
+}
+
+.cancel-btn:active {
+    transform: scale(0.97);
+}
+
+.save-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #D000F7, #24BAE3);
+    color: #fff;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 4px 4px 10px #c1c8d3, -4px -4px 10px #fff;
+    text-align: center;
+    transition: all 0.2s ease;
+    user-select: none;
+    border: none;
+}
+
+.save-btn:active {
+    transform: scale(0.97);
+}
+
+@media (max-width: 480px) {
+    .add-transaction-box {
+        margin: 0 14px;
+        padding: 20px;
+    }
 }

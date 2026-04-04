@@ -187,7 +187,7 @@
                                     <option value="amtAsc">Amount &uarr;</option>
                                     <option value="amtDesc">Amount &darr;</option>
                                 </select>
-                                <button class="add-btn" id="add-tnx-btn">Add Transaction</button>
+                                <button class="add-btn" id="add-txn-btn">Add Transaction</button>
                             </div>
                         </div>
 
@@ -217,15 +217,57 @@
                             <p>Coming soon...</p>
                         </div>
                     </div>
-                </div>
-
-                
+                </div>  
             </div>
-
-            
-
         </div>
 
+        <!-- Add & Edit Section -->
+        <div class="txn-card-bg" id="txn-card" style="display: none;">
+            <div class="add-transaction-box">
+                <h5 class="box-heading" id="box-heading">Add Transaction</h5>
+
+                <div class="txn-input-section">
+                    <label>Date</label>
+                    <input type="date" id="input-date" class="data-input">
+                </div>
+                <div class="txn-input-section">
+                    <label>Description</label>
+                    <input type="text" id="input-desc" placeholder="eg. Movie Tickets.." class="data-input">
+                </div>
+                <div class="txn-input-section">
+                    <label>Amount</label>
+                    <input type="number" id="input-amount" placeholder="e.g 500" class="data-input">
+                </div>
+                <div class="txn-input-section">
+                    <label>Category</label>
+                    <select id="input-category" class="data-input">
+                        <option value="">Select Category</option>
+                        <option>Entertainment</option>
+                        <option>Food</option>
+                        <option>Freelance</option>
+                        <option>Healthcare</option>
+                        <option>Investment</option>
+                        <option>Salary</option>
+                        <option>Shopping</option>
+                        <option>Transport</option>
+                        <option>Utilities</option>
+                    </select>
+                </div>
+                <div class="txn-input-section">
+                    <label>Type</label>
+                    <select id="input-type" class="data-input">
+                        <option value="">Select Type</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+
+                <div class="action-btn">
+                    <button class="cancel-btn" id="cancel-btn">Cancel</button>
+                    <button class="save-btn" id="save-btn">Save</button>
+                </div>
+            </div>
+        </div>
         <!-- Chart.js -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
